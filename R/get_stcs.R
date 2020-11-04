@@ -10,6 +10,7 @@
 #' @param data_dim dimesions of original data. Used for calculating df for
 #' t distributed test statistics, ignored if the test statistic is normal
 #' @export get_stcs
+#' @import osc
 
 get_stcs<- function(data, alpha_local, null_distribution, data_dim){
   if(null_distribution == "normal") thr<- qnorm(1-alpha_local/2)
