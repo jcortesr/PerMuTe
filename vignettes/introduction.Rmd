@@ -25,7 +25,7 @@ taking a quick look:
 
 
 ```{r setup}
-library(mtr)
+library(PerMuTe)
 str(temp_gistemp)
 ```
 
@@ -148,7 +148,7 @@ results<- multiple_testing_correction(data = temp_gistemp,
 ```
 When verbose=TRUE, the function prints when it has completed multiples of 10 permutations
 
-In the results we have a named list of 2d matrices matching the lon, lat dimentions of the 
+In the results we have a named list of 2d matrices matching the lon, lat dimensions of the 
 input data. Each matrix corresponds to each specified method, where each entry
 is TRUE or FALSE depending on whether or not it is significant. The first two matrices 
 are the test statistic at each grid cell and their corresponding p-values. 
