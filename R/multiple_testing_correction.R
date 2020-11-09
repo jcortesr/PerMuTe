@@ -52,6 +52,7 @@ multiple_testing_correction<- function(data,
   out<- threshold_data(perm_results=perm_results, alpha_local=alpha_local,
                        alpha_global=alpha_global, data_dim=dim(data),
                        null_distribution=null_distribution)
-
+  class(out)<- "mtc"
+  summary.mtc()
   return(out)
 }
