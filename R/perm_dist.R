@@ -31,5 +31,6 @@ perm_dist<- function(data, fx, nperm=1000,
     stcs[i]<- get_stcs(tmp, alpha_local, null_distribution)$stcs
     if(verbose) if((i%%10)==0) cat(i,"\n")
   }
+  cat("finished!\n\n")
   return(list(maxT = maxT, stcs = stcs, original_results = tmp))
 }
