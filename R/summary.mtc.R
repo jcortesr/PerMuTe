@@ -4,7 +4,6 @@
 #' for each mutliple testing correction.
 #'
 #' @param object an object of class mtr
-#' @noRd
 
 summary.mtc<- function(object){
   out1<- t(sapply(object[1:2], function(x) summary(as.vector(x))))
