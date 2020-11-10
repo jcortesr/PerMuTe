@@ -42,6 +42,10 @@ threshold_data<- function(perm_results, alpha_local, alpha_global, data_dim,
   wh_cluster<- which(tmp$clusters$cluster.count > stcs_thr)
   wh_cluster_sel<- tmp$clusters$clusters %in% wh_cluster
   out$stcs<- apply(tmp$clusters$clusters, 1:2, function(x, wh_cluster) wh_cluster %in% x, wh_cluster)
+  data_dimnames<- attr(out$test_statistic, "dimnames")
+  if(!is.null(data_dimnames)) {
+    for(i in 1:length(out)) attr(out[[i]], "dimnames")<- data_dimnames
+  }
   return(out)
 }
 
