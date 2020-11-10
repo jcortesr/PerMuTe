@@ -1,6 +1,8 @@
 ---
 title: "Introduction"
-output: rmarkdown::html_vignette
+output:
+  md_document:
+    variant: markdown_github
 vignette: >
   %\VignetteIndexEntry{introduction}
   %\VignetteEngine{knitr::rmarkdown}
@@ -25,11 +27,11 @@ taking a quick look:
 
 
 ```{r setup}
-library(mtr)
+library(PerMuTe)
 str(temp_gistemp)
 ```
 
-```{r setup}
+```{r}
 image(temp_gistemp[,,1])
 ```
 Our objective is to determine **where** there are significant increasing or 
@@ -40,15 +42,14 @@ that our results have false positives. This probability is what we control, at
 the desired $\alpha$, when we apply a correction for multiple testing. 
 
 The popular Bonferroni correction and related methods are **too conservative** 
-when performing thousands of tests, so we follow two novel permutation methods, 
-as described in
+when performing thousands of tests, so we follow two novel permutation methods 
+which perform better. These methods are described in:
 
 > Cort\'es, J., Mahecha, M., Reichstein, M. et al. Accounting for multiple 
 testing in the analysis of spatio-temporal environmental data. Environ Ecol Stat 27, 
 293–318 (2020). https://doi.org/10.1007/s10651-020-00446-4
 
-These new methods generally perform better. Note that the temperature example 
-is also shown in the paper above. 
+Please use the above citation when using the code provided in this R package. 
 
 
 ## Data and Method 
@@ -102,34 +103,34 @@ for serial autocorrelation is included:
 ```{r}
 sample_mk_function
 ```
-method
-:Which correction for multiple testing should be applied. Defaults to all. 
+**method**
+Which correction for multiple testing should be applied. Defaults to all. 
 Options are: c("maxT", "stcs", "bonferroni", "bh", "by", "holmes", "hochberg")
 
-nperm
-:number of permutations to perform. Default to 1000, which is a typical value. 
+**nperm**
+number of permutations to perform. Default to 1000, which is a typical value. 
 For testing the function a lower value is better, e.g., 10. 
 
-alpha_local
-:significance level at each grid cell. 
+**alpha_local**
+significance level at each grid cell. 
 
-alpha_global
-:significance level for the overall study area
+**alpha_global**
+significance level for the overall study area
 
-null_distribution
-:for bonferroni and related methods, a distribution is needed to derive the 
+**null_distribution**
+for bonferroni and related methods, a distribution is needed to derive the 
 p-values of the test statistics. Supported options are "normal" and "t". For 
 example, the Mann-Kendall's S can be converted to a Z score, and so the 
 distribution is "normal". 
 
-seed
-:set a seed to get same results every time. 
+**seed**
+set a seed to get same results every time. 
 
-block_size
-:length of block for performing block permutations. 
+**block_size**
+length of block for performing block permutations. 
 
-verbose
-:a counter that prints when it is done with every 10 permutations. Defaults to 
+**verbose**
+a counter that prints when it is done with every 10 permutations. Defaults to 
 TRUE
                                    
 
@@ -148,7 +149,7 @@ results<- multiple_testing_correction(data = temp_gistemp,
 ```
 When verbose=TRUE, the function prints when it has completed multiples of 10 permutations
 
-In the results we have a named list of 2d matrices matching the lon, lat dimentions of the 
+In the results we have a named list of 2d matrices matching the lon, lat dimensions of the 
 input data. Each matrix corresponds to each specified method, where each entry
 is TRUE or FALSE depending on whether or not it is significant. The first two matrices 
 are the test statistic at each grid cell and their corresponding p-values. 
@@ -162,6 +163,13 @@ To look at our data results we can do
 
 ```{r}
 image(results$test_statistic)
+
+```
+
+In the image above, darker shades of red indicated a more extreme test statistic. In 
+the images below, grid cells where significance is found are shown in red. 
+
+```{r}
 image(results$maxT)
 image(results$stcs)
 ```
