@@ -9,6 +9,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+# Introduction
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -52,14 +54,14 @@ testing in the analysis of spatio-temporal environmental data. Environ Ecol Stat
 Please use the above citation when using the code provided in this R package. 
 
 
-## Data and Method 
+## Data and Methods
 * Gridded temperature data for the world, averaged yearly from 1951-2018
 * Mann-Kendall trend test at each grid cell, at $\alpha_{local} = 0.05$  
 * Permutation correction for multiple testing, at $\alpha_{global} = 0.05$: 
   + Based on the maximum statistic (maxT)
   + Based on the supra-threshold cluster size (STCS)
   
-Note: there are two $alpha$'s above. The $\alpha_{local}$ controls the **individual**
+Note: there are two $\alpha$'s above. The $\alpha_{local}$ controls the **individual**
 test's significance, while the $\alpha_{global}$ controls the **overall** 
 probability of having a false positive. I recommend that these two be equal to 
 avoid any confusion in the interpretation of the results. 
@@ -88,12 +90,12 @@ The above is steps are what is already implemented for you in the package.
 There are several inputs to the main function of the r package: 
 `multiple_testing correction`. We go over each of them briefly. 
 
-data 
-:The input data must be a 3d array, where the dimensions are (lon, lat, t), in 
+**data** 
+The input data must be a 3d array, where the dimensions are (lon, lat, t), in 
 that order. 
 
-fx
-:This is the desired function to be applied at each grid cell. You need to specify 
+**fx**
+This is the desired function to be applied at each grid cell. You need to specify 
 your own function in R. This requires a little more programming but allows for 
 any type of analysis at the grid cell level. Permutation methods are 
 computationally expensive, so we try to keep the function to its minimum 

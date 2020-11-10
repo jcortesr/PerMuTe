@@ -1,3 +1,6 @@
+Introduction
+============
+
 Here we give an introduction to the package multiple testing in R! We do
 a sample analysis and look at trends in gridded temperature data,
 provided by NASA here:
@@ -44,8 +47,8 @@ described in:
 Please use the above citation when using the code provided in this R
 package.
 
-Data and Method
----------------
+Data and Methods
+----------------
 
 -   Gridded temperature data for the world, averaged yearly from
     1951-2018
@@ -113,10 +116,10 @@ R setup
 There are several inputs to the main function of the r package:
 `multiple_testing correction`. We go over each of them briefly.
 
-data :The input data must be a 3d array, where the dimensions are (lon,
-lat, t), in that order.
+**data** The input data must be a 3d array, where the dimensions are
+(lon, lat, t), in that order.
 
-fx :This is the desired function to be applied at each grid cell. You
+**fx** This is the desired function to be applied at each grid cell. You
 need to specify your own function in R. This requires a little more
 programming but allows for any type of analysis at the grid cell level.
 Permutation methods are computationally expensive, so we try to keep the
@@ -131,7 +134,7 @@ sample_mk_function
 #>   z<- mk_z_stat(xn)
 #>   return(z)
 #> }
-#> <bytecode: 0xa0b0c68>
+#> <bytecode: 0x8328c00>
 #> <environment: namespace:PerMuTe>
 ```
 
@@ -173,7 +176,28 @@ results<- multiple_testing_correction(data = temp_gistemp,
                                       alpha_global = 0.10, 
                                       null_distribution = "normal")
 #> starting permutations:
-#> 10
+#> 10 
+#> finished!
+#> 
+#> Summary of test statistic and p-values:
+#> 
+#>                   Min. 1st Qu. Median   Mean 3rd Qu.   Max. NA's
+#> test_statistic -2.4677  1.8233 2.5109 2.3082  2.9330 4.8054   26
+#> pval            0.0000  0.0034 0.0120 0.0931  0.0683 1.0000   26
+#> 
+#> 
+#> Number of significant grid cells by multiple testing correction:
+#> 
+#>       method significant not significant
+#>  uncorrected       13184            2990
+#>         stcs       13167            3033
+#>           bh       12812            3362
+#>           by        2354           13820
+#>         maxT         725           15449
+#>       walker          31           16143
+#>   bonferroni          30           16144
+#>     hochberg          30           16144
+#>         holm          30           16144
 ```
 
 When verbose=TRUE, the function prints when it has completed multiples
