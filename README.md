@@ -1,8 +1,18 @@
 Introduction
 ============
 
-Here we give an introduction to the package multiple testing in R! We do
-a sample analysis and look at trends in gridded temperature data,
+Here we give an introduction to the package Permutation-based Multiple
+Testing in R! We follow the methods described in:
+
+> Cort'es, J., Mahecha, M., Reichstein, M. et al. Accounting for
+> multiple testing in the analysis of spatio-temporal environmental
+> data. Environ Ecol Stat 27, 293–318 (2020).
+> <a href="https://doi.org/10.1007/s10651-020-00446-" class="uri">https://doi.org/10.1007/s10651-020-00446-</a>
+
+Please use the above citation when using the code provided in this R
+package.
+
+We do a sample analysis and look at trends in gridded temperature data,
 provided by NASA here:
 
 <a href="https://data.giss.nasa.gov/pub/gistemp/GHCNv3/gistemp1200_ERSSTv5.nc.gz" class="uri">https://data.giss.nasa.gov/pub/gistemp/GHCNv3/gistemp1200_ERSSTv5.nc.gz</a>
@@ -37,15 +47,7 @@ correction for multiple testing.
 The popular Bonferroni correction and related methods are **too
 conservative** when performing thousands of tests, so we follow two
 novel permutation methods which perform better. These methods are
-described in:
-
-> Cort'es, J., Mahecha, M., Reichstein, M. et al. Accounting for
-> multiple testing in the analysis of spatio-temporal environmental
-> data. Environ Ecol Stat 27, 293–318 (2020).
-> <a href="https://doi.org/10.1007/s10651-020-00446-4" class="uri">https://doi.org/10.1007/s10651-020-00446-4</a>
-
-Please use the above citation when using the code provided in this R
-package.
+described in the manuscript cited above.
 
 Data and Methods
 ----------------
@@ -59,12 +61,11 @@ Data and Methods
     -   Based on the maximum statistic (maxT)
     -   Based on the supra-threshold cluster size (STCS)
 
-Note: there are two *a**l**p**h**a*’s above. The
-*α*<sub>*l**o**c**a**l*</sub> controls the **individual** test’s
-significance, while the *α*<sub>*g**l**o**b**a**l*</sub> controls the
-**overall** probability of having a false positive. I recommend that
-these two be equal to avoid any confusion in the interpretation of the
-results.
+Note: there are two *α*’s above. The *α*<sub>*l**o**c**a**l*</sub>
+controls the **individual** test’s significance, while the
+*α*<sub>*g**l**o**b**a**l*</sub> controls the **overall** probability of
+having a false positive. I recommend that these two be equal to avoid
+any confusion in the interpretation of the results.
 
 The idea is to derive the distribution of maxT and STCS via
 permutations. With these distributions we can establish thresholds to
@@ -134,7 +135,7 @@ sample_mk_function
 #>   z<- mk_z_stat(xn)
 #>   return(z)
 #> }
-#> <bytecode: 0x8328c00>
+#> <bytecode: 0x83c82c0>
 #> <environment: namespace:PerMuTe>
 ```
 
@@ -193,7 +194,7 @@ results<- multiple_testing_correction(data = temp_gistemp,
 #>         stcs       13167            3033
 #>           bh       12812            3362
 #>           by        2354           13820
-#>         maxT         725           15449
+#>         maxT         915           15259
 #>       walker          31           16143
 #>   bonferroni          30           16144
 #>     hochberg          30           16144

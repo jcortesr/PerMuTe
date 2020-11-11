@@ -18,8 +18,16 @@ knitr::opts_chunk$set(
 )
 ```
 
-Here we give an introduction to the package multiple testing in R! We do a sample
-analysis and look at trends in gridded temperature data, provided by NASA here:
+Here we give an introduction to the package Permutation-based Multiple Testing in R! 
+We follow the methods described in: 
+
+> Cort\'es, J., Mahecha, M., Reichstein, M. et al. Accounting for multiple 
+testing in the analysis of spatio-temporal environmental data. Environ Ecol Stat 27, 
+293–318 (2020). https://doi.org/10.1007/s10651-020-00446-
+
+Please use the above citation when using the code provided in this R package. 
+
+We do a sample analysis and look at trends in gridded temperature data, provided by NASA here:
 
 https://data.giss.nasa.gov/pub/gistemp/GHCNv3/gistemp1200_ERSSTv5.nc.gz
 
@@ -45,13 +53,7 @@ the desired $\alpha$, when we apply a correction for multiple testing.
 
 The popular Bonferroni correction and related methods are **too conservative** 
 when performing thousands of tests, so we follow two novel permutation methods 
-which perform better. These methods are described in:
-
-> Cort\'es, J., Mahecha, M., Reichstein, M. et al. Accounting for multiple 
-testing in the analysis of spatio-temporal environmental data. Environ Ecol Stat 27, 
-293–318 (2020). https://doi.org/10.1007/s10651-020-00446-4
-
-Please use the above citation when using the code provided in this R package. 
+which perform better. These methods are described in the manuscript cited above. 
 
 
 ## Data and Methods
