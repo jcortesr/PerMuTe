@@ -101,10 +101,10 @@ that order.
 
 **fx**
 This is the desired function to be applied at each grid cell. You need to specify 
-your own function in R. This requires a little more programming but allows for 
-any type of analysis at the grid cell level. Permutation methods are 
+your own function in R. Permutation methods are 
 computationally expensive, so we try to keep the function to its minimum 
-requirements. A sample function to perform the MK trend test with an adjustment
+requirements. The function must return *only* the test statitsic. 
+A sample function to perform the MK trend test with an adjustment
 for serial autocorrelation is included: 
 
 ```{r}
@@ -112,7 +112,8 @@ sample_mk_function
 ```
 **method**
 Which correction for multiple testing should be applied. Defaults to all. 
-Options are: c("maxT", "stcs", "bonferroni", "bh", "by", "holmes", "hochberg")
+Options are: c("maxT", "stcs", "bonferroni", "bh", "by", "holmes", "hochberg"). 
+Specifying only some methods currently not available. 
 
 **nperm**
 number of permutations to perform. Default to 1000, which is a typical value. 

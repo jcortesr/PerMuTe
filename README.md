@@ -124,11 +124,11 @@ There are several inputs to the main function of the r package:
 (lon, lat, t), in that order.
 
 **fx** This is the desired function to be applied at each grid cell. You
-need to specify your own function in R. This requires a little more
-programming but allows for any type of analysis at the grid cell level.
-Permutation methods are computationally expensive, so we try to keep the
-function to its minimum requirements. A sample function to perform the
-MK trend test with an adjustment for serial autocorrelation is included:
+need to specify your own function in R. Permutation methods are
+computationally expensive, so we try to keep the function to its minimum
+requirements. The function must return *only* the test statitsic. A
+sample function to perform the MK trend test with an adjustment for
+serial autocorrelation is included:
 
 ``` r
 sample_mk_function
@@ -138,13 +138,14 @@ sample_mk_function
 #>   z<- mk_z_stat(xn)
 #>   return(z)
 #> }
-#> <bytecode: 0x9a43e90>
+#> <bytecode: 0x928cfd8>
 #> <environment: namespace:PerMuTe>
 ```
 
 **method** Which correction for multiple testing should be applied.
 Defaults to all. Options are: c(“maxT”, “stcs”, “bonferroni”, “bh”,
-“by”, “holmes”, “hochberg”)
+“by”, “holmes”, “hochberg”). Specifying only some methods currently not
+available.
 
 **nperm** number of permutations to perform. Default to 1000, which is a
 typical value. For testing the function a lower value is better, e.g.,
@@ -197,7 +198,7 @@ results<- multiple_testing_correction(data = temp_gistemp,
 #>         stcs       13167            3033
 #>           bh       12812            3362
 #>           by        2354           13820
-#>         maxT         554           15620
+#>         maxT         314           15860
 #>       walker          31           16143
 #>   bonferroni          30           16144
 #>     hochberg          30           16144
