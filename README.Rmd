@@ -93,7 +93,7 @@ The above is steps are what is already implemented for you in the package.
 ## R setup
 
 There are several inputs to the main function of the r package: 
-`multiple\_testing\_correction`. We go over each of them briefly. 
+`multiple_testing_correction`. We go over each of them briefly. 
 
 **data** 
 The input data must be a 3d array, where the dimensions are (lon, lat, t), in 

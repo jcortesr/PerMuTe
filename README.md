@@ -118,7 +118,7 @@ R setup
 -------
 
 There are several inputs to the main function of the r package:
-`multiple\_testing\_correction`. We go over each of them briefly.
+`multiple_testing_correction`. We go over each of them briefly.
 
 **data** The input data must be a 3d array, where the dimensions are
 (lon, lat, t), in that order.
@@ -138,7 +138,7 @@ sample_mk_function
 #>   z<- mk_z_stat(xn)
 #>   return(z)
 #> }
-#> <bytecode: 0x9afb548>
+#> <bytecode: 0x9e2afd8>
 #> <environment: namespace:PerMuTe>
 ```
 
@@ -198,7 +198,7 @@ results<- multiple_testing_correction(data = temp_gistemp,
 #>         stcs       13167            3033
 #>           bh       12812            3362
 #>           by        2354           13820
-#>         maxT         687           15487
+#>         maxT        1645           14529
 #>       walker          31           16143
 #>   bonferroni          30           16144
 #>     hochberg          30           16144
