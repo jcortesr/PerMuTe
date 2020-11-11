@@ -11,6 +11,8 @@ vignette: >
 
 # Introduction
 
+[![DOI](https://zenodo.org/badge/310030387.svg)](https://zenodo.org/badge/latestdoi/310030387)
+
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,

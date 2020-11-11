@@ -1,6 +1,8 @@
 Introduction
 ============
 
+[![DOI](https://zenodo.org/badge/310030387.svg)](https://zenodo.org/badge/latestdoi/310030387)
+
 Here we give an introduction to the package Permutation-based Multiple
 Testing in R! We follow the methods described in:
 
@@ -35,14 +37,15 @@ str(temp_gistemp)
 image(temp_gistemp[,,1])
 ```
 
-![](README_files/figure-markdown_github/unnamed-chunk-2-1.png) Our
-objective is to determine **where** there are significant increasing or
-decreasing trends. For this, we perform a trend test at each grid cell.
-**Note** when doing this, we are repeating a test thousands of times and
-the existance of false positives is **guaranteed**. Ideally, we want to
-control the probability that our results have false positives. This
-probability is what we control, at the desired *α*, when we apply a
-correction for multiple testing.
+![](README_files/figure-markdown_github/unnamed-chunk-2-1.png)
+
+Our objective is to determine **where** there are significant increasing
+or decreasing trends. For this, we perform a trend test at each grid
+cell. **Note** when doing this, we are repeating a test thousands of
+times and the existance of false positives is **guaranteed**. Ideally,
+we want to control the probability that our results have false
+positives. This probability is what we control, at the desired *α*, when
+we apply a correction for multiple testing.
 
 The popular Bonferroni correction and related methods are **too
 conservative** when performing thousands of tests, so we follow two
@@ -135,7 +138,7 @@ sample_mk_function
 #>   z<- mk_z_stat(xn)
 #>   return(z)
 #> }
-#> <bytecode: 0x83c82c0>
+#> <bytecode: 0xa03eb70>
 #> <environment: namespace:PerMuTe>
 ```
 
@@ -194,7 +197,7 @@ results<- multiple_testing_correction(data = temp_gistemp,
 #>         stcs       13167            3033
 #>           bh       12812            3362
 #>           by        2354           13820
-#>         maxT         915           15259
+#>         maxT         152           16022
 #>       walker          31           16143
 #>   bonferroni          30           16144
 #>     hochberg          30           16144
@@ -254,15 +257,12 @@ summarizing by continent.
 We end this intro with a nicer map:
 
 ``` r
-#library(raster)
 library(ggplot2)
 library(sp)
 library(sf)
 #> Linking to GEOS 3.7.2, GDAL 2.4.2, PROJ 5.2.0
-#library(rgeos)
 library(maps)
 library(reshape2)
-# world <- ne_countries(scale = "medium", returnclass = "sf")
 temperature_results_stcs<- melt(results$test_statistic)
 spPoints<- SpatialPointsDataFrame(coords = data.frame(temperature_results_stcs[,1:2]),
                                   data = data.frame(mk_z=temperature_results_stcs$value),
