@@ -44,6 +44,7 @@ str(temp_gistemp)
 ```{r}
 image(temp_gistemp[,,1])
 ```
+
 Our objective is to determine **where** there are significant increasing or 
 decreasing trends. For this, we perform a trend test at each grid cell. **Note** 
 when doing this, we are repeating a test thousands of times and the existance of 
@@ -191,14 +192,11 @@ continent.
 We end this intro with a nicer map:
 
 ```{r}
-#library(raster)
 library(ggplot2)
 library(sp)
 library(sf)
-#library(rgeos)
 library(maps)
 library(reshape2)
-# world <- ne_countries(scale = "medium", returnclass = "sf")
 temperature_results_stcs<- melt(results$test_statistic)
 spPoints<- SpatialPointsDataFrame(coords = data.frame(temperature_results_stcs[,1:2]),
                                   data = data.frame(mk_z=temperature_results_stcs$value),
