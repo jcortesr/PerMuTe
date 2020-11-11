@@ -11,8 +11,8 @@ Testing in R! We follow the methods described in:
 > data. Environ Ecol Stat 27, 293–318 (2020).
 > <a href="https://doi.org/10.1007/s10651-020-00446-" class="uri">https://doi.org/10.1007/s10651-020-00446-</a>
 
-Please use the above citation when using the code provided in this R
-package.
+Please cite both the software (Zenodo DOI) and the above paper when
+using the code provided in this R package.
 
 We do a sample analysis and look at trends in gridded temperature data,
 provided by NASA here:
@@ -138,7 +138,7 @@ sample_mk_function
 #>   z<- mk_z_stat(xn)
 #>   return(z)
 #> }
-#> <bytecode: 0xa03eb70>
+#> <bytecode: 0x9a43e90>
 #> <environment: namespace:PerMuTe>
 ```
 
@@ -197,7 +197,7 @@ results<- multiple_testing_correction(data = temp_gistemp,
 #>         stcs       13167            3033
 #>           bh       12812            3362
 #>           by        2354           13820
-#>         maxT         152           16022
+#>         maxT         554           15620
 #>       walker          31           16143
 #>   bonferroni          30           16144
 #>     hochberg          30           16144
