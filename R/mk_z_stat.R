@@ -7,7 +7,7 @@
 #' @export mk_z_stat
 
 mk_z_stat<- function(x){
-  if(any(is.na(x))) x[!is.na(x)]
+  if(any(is.na(x))) x<- x[!is.na(x)]
   if(length(x)<8) return(NA)
 
   s<- mk_s(x)
