@@ -1,5 +1,4 @@
-Introduction
-============
+# Introduction
 
 [![DOI](https://zenodo.org/badge/310030387.svg)](https://zenodo.org/badge/latestdoi/310030387)
 
@@ -9,7 +8,7 @@ Testing in R! We follow the methods described in:
 > Cort'es, J., Mahecha, M., Reichstein, M. et al. Accounting for
 > multiple testing in the analysis of spatio-temporal environmental
 > data. Environ Ecol Stat 27, 293–318 (2020).
-> <a href="https://doi.org/10.1007/s10651-020-00446-" class="uri">https://doi.org/10.1007/s10651-020-00446-</a>
+> <https://doi.org/10.1007/s10651-020-00446->
 
 Please cite both the software (Zenodo DOI) and the above paper when
 using the code provided in this R package.
@@ -17,13 +16,17 @@ using the code provided in this R package.
 We do a sample analysis and look at trends in gridded temperature data,
 provided by NASA here:
 
-<a href="https://data.giss.nasa.gov/pub/gistemp/GHCNv3/gistemp1200_ERSSTv5.nc.gz" class="uri">https://data.giss.nasa.gov/pub/gistemp/GHCNv3/gistemp1200_ERSSTv5.nc.gz</a>
+<https://data.giss.nasa.gov/pub/gistemp/GHCNv3/gistemp1200_ERSSTv5.nc.gz>
 
 The data in the package has been preprocessed so that we have yearly
 averages in a 3d array with dimensions (lon, lat, t), where t is time.
 We start by taking a quick look:
 
 ``` r
+# install.packages(devtools)
+# library(devtools)
+# devtools::install_github("jcortesr/PerMuTe")
+
 library(PerMuTe)
 str(temp_gistemp)
 #>  num [1:180, 1:90, 1:68] NaN NaN NaN NaN NaN NaN NaN NaN NaN NaN ...
@@ -52,8 +55,7 @@ conservative** when performing thousands of tests, so we follow two
 novel permutation methods which perform better. These methods are
 described in the manuscript cited above.
 
-Data and Methods
-----------------
+## Data and Methods
 
 -   Gridded temperature data for the world, averaged yearly from
     1951-2018
@@ -76,36 +78,12 @@ control the overall false positives.
 
 For each permutation method we do the following:
 
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>maxT</th>
-<th>STCS</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Permute images</td>
-<td>Permute images</td>
-</tr>
-<tr class="even">
-<td>Calculate test statistic at each grid cell</td>
-<td>Calculate test statistic at each grid cell</td>
-</tr>
-<tr class="odd">
-<td>Keep the maximum statistic among all grid cells</td>
-<td>Keep the size of the largest cluster of significant grid cells</td>
-</tr>
-<tr class="even">
-<td>Repeat <strong>N</strong> times</td>
-<td>Repeat <strong>N</strong> times</td>
-</tr>
-</tbody>
-</table>
+| maxT                                            | STCS                                                           |
+|-------------------------------------------------|----------------------------------------------------------------|
+| Permute images                                  | Permute images                                                 |
+| Calculate test statistic at each grid cell      | Calculate test statistic at each grid cell                     |
+| Keep the maximum statistic among all grid cells | Keep the size of the largest cluster of significant grid cells |
+| Repeat **N** times                              | Repeat **N** times                                             |
 
 Where **N** is typically 1000. Because we are essentially repeating the
 analysis **N** times, this can be time consuming. For the purposes of
@@ -114,8 +92,7 @@ this tutorial, we will set **N** to be 100.
 The above is steps are what is already implemented for you in the
 package.
 
-R setup
--------
+## R setup
 
 There are several inputs to the main function of the r package:
 `multiple_testing_correction`. We go over each of them briefly.
@@ -138,7 +115,7 @@ sample_mk_function
 #>   z<- mk_z_stat(xn)
 #>   return(z)
 #> }
-#> <bytecode: 0x9e2afd8>
+#> <bytecode: 0x981b358>
 #> <environment: namespace:PerMuTe>
 ```
 
@@ -151,24 +128,23 @@ available.
 typical value. For testing the function a lower value is better, e.g.,
 10.
 
-**alpha\_local** significance level at each grid cell.
+**alpha_local** significance level at each grid cell.
 
-**alpha\_global** significance level for the overall study area
+**alpha_global** significance level for the overall study area
 
-**null\_distribution** for bonferroni and related methods, a
-distribution is needed to derive the p-values of the test statistics.
-Supported options are “normal” and “t”. For example, the Mann-Kendall’s
-S can be converted to a Z score, and so the distribution is “normal”.
+**null_distribution** for bonferroni and related methods, a distribution
+is needed to derive the p-values of the test statistics. Supported
+options are “normal” and “t”. For example, the Mann-Kendall’s S can be
+converted to a Z score, and so the distribution is “normal”.
 
 **seed** set a seed to get same results every time.
 
-**block\_size** length of block for performing block permutations.
+**block_size** length of block for performing block permutations.
 
 **verbose** a counter that prints when it is done with every 10
 permutations. Defaults to TRUE
 
-Running the analysis
---------------------
+## Running the analysis
 
 Now that we have explained everything, lets run the analysis in R!
 
@@ -198,7 +174,7 @@ results<- multiple_testing_correction(data = temp_gistemp,
 #>         stcs       13167            3033
 #>           bh       12812            3362
 #>           by        2354           13820
-#>         maxT        1645           14529
+#>         maxT         139           16035
 #>       walker          31           16143
 #>   bonferroni          30           16144
 #>     hochberg          30           16144
@@ -216,8 +192,7 @@ grid cell and their corresponding p-values.
 
 The End!
 
-Plotting results
-----------------
+## Plotting results
 
 To look at our data results we can do
 
@@ -294,6 +269,6 @@ ggplot(polys_sf) +
 
 The above map was generated following
 
-<a href="https://stackoverflow.com/questions/43612903/how-to-properly-plot-projected-gridded-data-in-ggplot2" class="uri">https://stackoverflow.com/questions/43612903/how-to-properly-plot-projected-gridded-data-in-ggplot2</a>
+<https://stackoverflow.com/questions/43612903/how-to-properly-plot-projected-gridded-data-in-ggplot2>
 
 The End!

@@ -39,6 +39,10 @@ taking a quick look:
 
 
 ```{r setup}
+# install.packages(devtools)
+# library(devtools)
+# devtools::install_github("jcortesr/PerMuTe")
+
 library(PerMuTe)
 str(temp_gistemp)
 ```
