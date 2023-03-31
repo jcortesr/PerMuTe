@@ -14,7 +14,7 @@ mk_z_stat<- function(x){
   n<- length(x)
   var_s<- n*(n-1)*(2*n+5)/18
   if (length(unique(x)) < n) {
-    tmp <- unique(n)
+    tmp <- unique(x)
     for (i in 1:length(tmp)) {
       tie <- length(which(x == tmp[i]))
       if (tie > 1) {
