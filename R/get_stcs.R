@@ -46,6 +46,8 @@ get_stcs<- function(data, alpha_local, null_distribution, data_dim){
   names(clusters_sep)<- c("clusters", "cluster.count")
 
   stcs<- max(clusters_sep$cluster.count)
-
-  return(list(stcs=stcs, clusters=clusters_sep))
+  stcs_idx<- which(clusters_sep$cluster.count==stcs)
+  stcs_cluster_results<- data[clusters_sep$clusters==stcs_idx]
+  stcs_maxT<- max(abs(stcs_cluster_results), na.rm = TRUE)
+  return(list(stcs=stcs, clusters=clusters_sep, stcs_maxT = stcs_maxT))
 }
