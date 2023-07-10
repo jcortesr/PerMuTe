@@ -42,6 +42,17 @@ threshold_data<- function(perm_results, alpha_local, alpha_global, data_dim,
   wh_cluster<- which(tmp$clusters$cluster.count > stcs_thr)
   wh_cluster_sel<- tmp$clusters$clusters %in% wh_cluster
   out$stcs<- apply(tmp$clusters$clusters, 1:2, function(x, wh_cluster) wh_cluster %in% x, wh_cluster)
+
+  # using both stcs and maxT in stcs
+  stcs_thr<- quantile(perm_results$stcs, 1-alpha_global/2, na.rm = TRUE)
+  stcs_maxT_thr<- quantile(perm_results$stcs_maxT, 1-alpha_global/2, na.rm = TRUE)
+  wh_cluster_stcs<- which(tmp$clusters$cluster.count > stcs_thr)
+  stcs_maxT<- vector(length=length(tmp$clusters$cluster.count))
+  for (i in 1:length(tmp$clusters$cluster.count)) stcs_maxT[i]<- max(abs(perm_results$original_results[tmp$clusters$clusters==i]), na.rm = TRUE)
+  wh_cluster_stcs_maxT<- which(stcs_maxT > stcs_maxT_thr)
+  wh_cluster_sel<- tmp$clusters$clusters %in% c(wh_cluster_stcs, wh_cluster_stcs_maxT)
+  out$stcs_maxT<- apply(tmp$clusters$clusters, 1:2, function(x, wh_cluster)  x %in% wh_cluster, wh_cluster=unique(c(wh_cluster_stcs, wh_cluster_stcs_maxT)))
+
   data_dimnames<- attr(out$test_statistic, "dimnames")
   if(!is.null(data_dimnames)) {
     for(i in 1:length(out)) attr(out[[i]], "dimnames")<- data_dimnames
