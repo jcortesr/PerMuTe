@@ -24,13 +24,17 @@ perm_dist<- function(data, fx, nperm=1000,
   perm_matrix<- perm_matrix(nobs = dim(data)[3], nperm = nperm, block_size = block_size, seed = seed)
   maxT<- vector(length = nperm)
   stcs<- vector(length = nperm)
+  stcs_maxT<- vector(length = nperm)
+
   cat("starting permutations:\n")
   for(i in 1:nperm){
     tmp<- apply(data[,,perm_matrix[i,]], 1:2, fx)
+    tmp_res<- get_stcs(tmp, alpha_local, null_distribution)
     maxT[i]<- max(abs(as.vector(tmp)), na.rm = TRUE)
-    stcs[i]<- get_stcs(tmp, alpha_local, null_distribution)$stcs
+    stcs[i]<- tmp_res$stcs
+    stcs_maxT[i]<- tmp_res$stcs_maxT
     if(verbose) if((i%%10)==0) cat(i,"\n")
   }
   cat("finished!\n\n")
-  return(list(maxT = maxT, stcs = stcs, original_results = tmp))
+  return(list(maxT = maxT, stcs = stcs, stcs_maxT = stcs_maxT, original_results = tmp))
 }
